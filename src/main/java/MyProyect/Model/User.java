@@ -36,6 +36,6 @@ public class User {
     private List<Task> listTasks;
 
     public void transition(Task task) {
-        this.listTasks.add(task);
+        (this.listTasks).add(task);
     }
 }

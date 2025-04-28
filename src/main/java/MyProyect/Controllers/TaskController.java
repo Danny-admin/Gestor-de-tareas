@@ -31,8 +31,27 @@ public class TaskController {
         return listTask.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(listTask);
     }
 
+    @GetMapping("/getCompletedTask")
+    public ResponseEntity<List<Task>> getCompletedTask(Authentication user) {
+        List<Task> list = service.getAllCompletedTasks(( (CustomUserDetails_Dto) user.getPrincipal()).getId() );
+        return list.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(list);
+    }
+    @GetMapping("/getIncompletedTask")
+    public ResponseEntity<?> getIncompletedTask(Authentication user) {
+        List<Task> list = service.getAllIncompletedTask(( (CustomUserDetails_Dto) user.getPrincipal()).getId() );
+        return list.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(list);
+    }
+
     @PostMapping("/postTask")
     public ResponseEntity<?> postTask(@Valid @RequestBody Task task, Authentication user) {
         return service.postTask(task,user.getName());
+    }
+    @PutMapping("/putTask")
+    public ResponseEntity<Task> putTask(@Valid @RequestBody Task task) {
+        return service.saveTask(task);
+    }
+    @DeleteMapping("/deleteTask")
+    public ResponseEntity<?> deleteTask(Long id_task) {
+        return service.deleteTask(id_task);
     }
 }

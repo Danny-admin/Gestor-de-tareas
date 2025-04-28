@@ -5,10 +5,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
 public class Jwt_Exceptions extends RuntimeException {
 
     public Jwt_Exceptions(String message){
